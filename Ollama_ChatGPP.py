@@ -12,11 +12,9 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tessera
 # API Key OpenAI
 openai.api_key = "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"  # Gantikan dengan API key OpenAI anda
 
-# Fungsi untuk menambah logo, teks tambahan, dan senarai GPP dengan butang muat turun
 def tambah_logo_dan_teks_dan_senarai_gpp(lokasi_logo, teks_tambahan, folder_gpp):
-    st.sidebar.image(lokasi_logo, width=250)
+    st.sidebar.image(lokasi_logo, width=250)  # Pastikan logo_path betul
     st.sidebar.write(teks_tambahan)
-    
     st.sidebar.write("**Senarai Garis Panduan Perancangan (GPP) dan Panduan Pelaksanaan (PP) yang tersedia di platform MyChatGPP**")
     for pdf_file in os.listdir(folder_gpp):
         if pdf_file.endswith(".pdf"):
@@ -209,7 +207,7 @@ def proses_soalan(soalan, folder_gpp):
             st.error("Tiada kandungan dari PDF yang relevan untuk dijadikan rujukan.")
 
 # Tetapkan lokasi logo, nama chatbot, teks tambahan, dan caption
-logo_path = "C:\\Users\\kimih\\Downloads\\Ollama_ChatGPP\\planmalaysia_logo.png"  # Tukar dengan laluan sebenar logo anda
+logo_path = "C:\\Users\\kimih\\Downloads\\Ollama_ChatGPP\\images\\planmalaysia_logo.png"  # Tukar dengan laluan sebenar logo anda
 nama_chatbot = "MyChatGPP"
 teks_tambahan = "Penafian: MyChatGPP adalah platform interaktif AI yang dibangunkan bagi tujuan pembelajaran dan masih BETA Version. Oleh yang demikian, kesilapan chatbot dalam menjawab soalan adalah boleh dijangka. Pengguna diminta untuk merujuk kepada dokumen pdf yang disertakan untuk maklumat yang lebih tepat. Terima kasih di atas kerjasama anda."
 caption = "Selamat datang ke MyChatGPP! Anda boleh cuba bertanyakan apa-apa soalan berkaitan GPP atau PP yang tersenarai di sebelah atau sila muat turun GPP atau PP di link yang disediakan."
