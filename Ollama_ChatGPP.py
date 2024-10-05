@@ -6,8 +6,9 @@ from PIL import Image
 import openai
 import difflib  # Untuk bandingan persamaan teks
 
-# Tetapkan laluan Tesseract jika diperlukan
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# Tidak perlu tetapkan laluan Tesseract secara eksplisit di pelayan
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
 
 # API Key OpenAI
 openai.api_key = "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"  # Gantikan dengan API key OpenAI anda
@@ -207,7 +208,7 @@ def proses_soalan(soalan, folder_gpp):
             st.error("Tiada kandungan dari PDF yang relevan untuk dijadikan rujukan.")
 
 # Tetapkan lokasi logo, nama chatbot, teks tambahan, dan caption
-logo_path = "images\\planmalaysia_logo.png"  # Tukar dengan laluan sebenar logo anda
+logo_path = "images/planmalaysia_logo.png"  # Tukar dengan laluan sebenar logo anda
 nama_chatbot = "MyChatGPP"
 teks_tambahan = "Penafian: MyChatGPP adalah platform interaktif AI yang dibangunkan bagi tujuan pembelajaran dan masih BETA Version. Oleh yang demikian, kesilapan chatbot dalam menjawab soalan adalah boleh dijangka. Pengguna diminta untuk merujuk kepada dokumen pdf yang disertakan untuk maklumat yang lebih tepat. Terima kasih di atas kerjasama anda."
 caption = "Selamat datang ke MyChatGPP! Anda boleh cuba bertanyakan apa-apa soalan berkaitan GPP atau PP yang tersenarai di sebelah atau sila muat turun GPP atau PP di link yang disediakan."
