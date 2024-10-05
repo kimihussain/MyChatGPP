@@ -207,13 +207,13 @@ def proses_soalan(soalan, folder_gpp):
             st.error("Tiada kandungan dari PDF yang relevan untuk dijadikan rujukan.")
 
 # Tetapkan lokasi logo, nama chatbot, teks tambahan, dan caption
-logo_path = "C:\\Users\\kimih\\Downloads\\Ollama_ChatGPP\\images\\planmalaysia_logo.png"  # Tukar dengan laluan sebenar logo anda
+logo_path = "images\\planmalaysia_logo.png"  # Tukar dengan laluan sebenar logo anda
 nama_chatbot = "MyChatGPP"
 teks_tambahan = "Penafian: MyChatGPP adalah platform interaktif AI yang dibangunkan bagi tujuan pembelajaran dan masih BETA Version. Oleh yang demikian, kesilapan chatbot dalam menjawab soalan adalah boleh dijangka. Pengguna diminta untuk merujuk kepada dokumen pdf yang disertakan untuk maklumat yang lebih tepat. Terima kasih di atas kerjasama anda."
 caption = "Selamat datang ke MyChatGPP! Anda boleh cuba bertanyakan apa-apa soalan berkaitan GPP atau PP yang tersenarai di sebelah atau sila muat turun GPP atau PP di link yang disediakan."
 
 # Tetapkan lokasi folder GPP PDF
-folder_gpp = "C:\\Users\\kimih\\Downloads\\Ollama_ChatGPP\\GPPpdf"
+folder_gpp = "GPPpdf"
 
 # Panggil antaramuka chatbot
 chatbot_interface(nama_chatbot, logo_path, teks_tambahan, caption, folder_gpp)
