@@ -1,4 +1,0 @@
-streamlit
-openai==0.28
-pymupdf
-Pillow
