@@ -1,0 +1,72 @@
+import os
+import streamlit as st
+import fitz  # PyMuPDF untuk membaca PDF
+import pytesseract
+from PIL import Image  # Pastikan modul Image diimport
+import subprocess
+
+# Tetapkan laluan Tesseract jika diperlukan
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+# Fungsi untuk membaca dan mengekstrak kandungan dari PDF
+def baca_kandungan_pdf(pdf_path):
+    kandungan = ""
+    try:
+        dokumen = fitz.open(pdf_path)
+        for halaman in dokumen:
+            teks = halaman.get_text()
+            if teks.strip():  # Jika ada teks, tambahkan ke kandungan
+                kandungan += teks
+            else:  # Jika tiada teks, cuba gunakan OCR
+                pix = halaman.get_pixmap()
+                image = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+                teks_ocr = pytesseract.image_to_string(image)
+                kandungan += teks_ocr
+        dokumen.close()
+    except Exception as e:
+        st.error(f"Error membaca PDF: {e}")
+    return kandungan
+
+# Fungsi untuk menjana jawapan menggunakan Ollama dengan subprocess
+def bina_jawapan_llama(soalan, kandungan):
+    try:
+        # Menggunakan perintah `ollama run` dengan input dari soalan dan kandungan
+        prompt = f"Jawab soalan berikut berdasarkan maklumat yang disediakan dalam Bahasa Melayu:\n\nKandungan PDF: {kandungan}\n\nSoalan: {soalan}"
+        result = subprocess.run(
+            ["ollama", "run", "llama3:latest"],
+            input=prompt,
+            text=True,
+            capture_output=True,
+            encoding='utf-8'  # Menggunakan encoding utf-8
+        )
+        return result.stdout.strip()
+    except Exception as e:
+        st.error(f"Error semasa menjana jawapan: {e}")
+
+# Antaramuka Streamlit
+st.title("Chatbot GPP dengan Llama Model")
+
+# Input soalan dari pengguna
+soalan = st.text_input("Masukkan soalan anda:")
+
+# Tetapkan lokasi folder GPP PDF
+folder_gpp = "C:\\Users\\kimih\\Downloads\\Ollama_ChatGPP\\GPPpdf"
+
+# Proses jika terdapat soalan
+if soalan:
+    dokumen_list = []
+    for pdf_file in os.listdir(folder_gpp):
+        if pdf_file.endswith(".pdf"):
+            pdf_path = os.path.join(folder_gpp, pdf_file)
+            kandungan = baca_kandungan_pdf(pdf_path)
+            if kandungan:
+                dokumen_list.append(kandungan)
+    
+    if dokumen_list:
+        # Menggabungkan semua kandungan dari dokumen-dokumen
+        kandungan_semua = " ".join(dokumen_list)
+        # Menjana jawapan berdasarkan kandungan PDF
+        jawapan = bina_jawapan_llama(soalan, kandungan_semua)
+        st.write(jawapan)
+    else:
+        st.error("Tiada kandungan dari PDF untuk dijadikan rujukan.")
