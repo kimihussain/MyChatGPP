@@ -11,7 +11,7 @@ import difflib  # Untuk bandingan persamaan teks
 
 
 # API Key OpenAI
-openai.api_key = "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"  # Gantikan dengan API key OpenAI anda
+openai.api_key = "sk-proj-a26WXgUOpS_6hjETjqlxKnEGL51trzyYo9Wap3_sNm5rPyp3c2rlet4YM7_nefhGVPXAYBgBCeVEvDJ5_lHTqVUljG3G3iXpLL96IA"  # Gantikan dengan API key OpenAI anda
 
 def tambah_logo_dan_teks_dan_senarai_gpp(lokasi_logo, teks_tambahan, folder_gpp):
     st.sidebar.image(lokasi_logo, width=250)  # Pastikan logo_path betul
